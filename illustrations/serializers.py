@@ -1,8 +1,8 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .models import Illustrations
 
-class IllustrationsSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Illustrations
-    fields = '__all__'
+class IllustrationsSerializer(ModelSerializer):
+    class Meta:
+        model = Illustrations
+        fields = '__all__'

@@ -1,7 +1,10 @@
 from django.urls import path 
-from .views import IllustrationViewset, IllustrationSpecificViewset
+from rest_framework.routers import DefaultRouter
+from .views import IllustrationViewset
 
-urlpatterns = [
-    path('', IllustrationViewset.as_view()),
-    path('<int:pk>/', IllustrationSpecificViewset.as_view()),
-]
+
+router = DefaultRouter()
+
+router.register(r'', IllustrationViewset )
+
+urlpatterns = router.urls
