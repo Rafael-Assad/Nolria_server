@@ -5,7 +5,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from .models import Contact
 from .serializers import ContactSerializer
 
-from .helpers import email_sender
+from .services import ContactSevices
 
 
 class ContactViewSet(ListCreateAPIView):
@@ -17,7 +17,7 @@ class ContactViewSet(ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         instance = serializer.save()
-        email_sent = email_sender(instance)
+        email_sent = ContactSevices.email_sender(instance)
         
         if email_sent:
             return Response(serializer.data, status=status.HTTP_201_CREATED)
