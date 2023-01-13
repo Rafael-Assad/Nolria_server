@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .models import Illustrations
 from .serializers import IllustrationsSerializer
-from .helpers import illustration_instance_preparetion
+from .services import IllustrationService
 
 
 class IllustrationViewset(ModelViewSet):
@@ -14,7 +14,7 @@ class IllustrationViewset(ModelViewSet):
     serializer_class = IllustrationsSerializer
     
     def create(self, request, *args, **kwargs):
-        new_illustration = illustration_instance_preparetion(request) 
+        new_illustration = IllustrationService.illustration_instance_preparetion(request) 
 
         serializer = self.get_serializer(data=new_illustration)
         serializer.is_valid(raise_exception=True)
