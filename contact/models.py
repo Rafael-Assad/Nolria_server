@@ -1,9 +1,9 @@
-from django.db import models
+from django.db.models import Model, CharField, EmailField, TextField, DateTimeField
 
 
-class Contact(models.Model):
-  name = models.CharField(max_length=100)
-  subject = models.CharField(max_length=100)
-  email = models.EmailField()
-  message = models.TextField()
-  created_at = models.DateTimeField(auto_now_add=True)
+class Contact(Model):
+  name =       CharField(max_length=100)
+  subject =    CharField(max_length=100)
+  email =      EmailField()
+  message =    TextField()
+  created_at = DateTimeField(auto_now_add=True)
