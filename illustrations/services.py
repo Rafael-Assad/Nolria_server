@@ -1,3 +1,4 @@
+from datetime import date
 from django.core.files.images import get_image_dimensions
 
 
@@ -10,15 +11,19 @@ class IllustrationService:
 
         illust_title= illustration_info['title']
         illust_description= illustration_info['description']
+        illustration_date= illustration_info['illustrater_at']
+        
+        illustrated_at = get_date_formated(illustration_date)
 
         complete_hash = f'#{illustration_info["hash"]}'
 
         illust_width, illust_height = get_image_dimensions(illustration_file)
-        illust_rows, illust_cols = IllustrationService.illustration_proportion(illust_width, illust_height)
+        illust_rows, illust_cols = illustration_proportion(illust_width, illust_height)
 
         new_illustration={'title': illust_title,
                           'description': illust_description,
                           'illustration': illustration_file,
+                          'illustrated_at': illustrated_at,
                           'rows': illust_rows,
                           'cols': illust_cols,
                           'hash': complete_hash}
@@ -30,8 +35,7 @@ class IllustrationService:
 
         return new_illustration
 
-    @staticmethod
-    def illustration_proportion(width, height):
+def illustration_proportion(width, height):
         height_x_width = height / width
         rows = 1
         cols = 1
@@ -46,3 +50,8 @@ class IllustrationService:
             rows = 2
             cols = 2
         return [rows, cols]
+
+def get_date_formated(date_string):
+    year, month, day = date_string.split('/')
+    
+    return date(year, month, day)
